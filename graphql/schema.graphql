@@ -19,6 +19,7 @@ type User {
     id: ID!
     name: String!
     email: String!
+    articles: [Article!]! @hasMany
     created_at: DateTime!
     updated_at: DateTime!
 }
@@ -27,15 +28,19 @@ type Article {
     id: ID!
     title: String!
     body: String!
+    user_id: ID!
+    user: User! @belongsTo
+    comments: [ArticleComment!]! @hasMany
     created_at: DateTime!
     updated_at: DateTime!
-    comments: [ArticleComment]
 }
 
 type ArticleComment {
     id: ID!
+    article_id: ID!
     user_id: ID!
-    user: User!
+    user: User! @belongsTo
+    article: Article!
     comment: String!
     created_at: DateTime!
     updated_at: DateTime!
