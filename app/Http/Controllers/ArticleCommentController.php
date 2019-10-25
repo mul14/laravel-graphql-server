@@ -14,17 +14,7 @@ class ArticleCommentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ArticleComment::paginate();
     }
 
     /**
@@ -35,51 +25,52 @@ class ArticleCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedAttributes = $this->validateAttributes();
+
+        return ArticleComment::create($validatedAttributes);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ArticleComment  $articleComment
+     * @param  \App\ArticleComment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(ArticleComment $articleComment)
+    public function show(Article $comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ArticleComment  $articleComment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ArticleComment $articleComment)
-    {
-        //
+        return $comment;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ArticleComment  $articleComment
+     * @param  \App\ArticleComment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ArticleComment $articleComment)
+    public function update(Request $request, Article $comment)
     {
-        //
+        $validatedAttributes = $this->validateAttributes();
+
+        return $comment->update($validatedAttributes);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ArticleComment  $articleComment
+     * @param  \App\ArticleComment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ArticleComment $articleComment)
+    public function destroy(Article $comment)
     {
-        //
+        return $comment->delete();
+    }
+
+    private function validateAttributes()
+    {
+        return request()->validate([
+            'user_id' => 'required',
+            'comment' => 'required',
+        ]);
     }
 }

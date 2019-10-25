@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
+use App\User;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,17 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::paginate();
+        return User::paginate();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -25,9 +35,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedAttributes = $this->validateAttributes();
-
-        return Article::create($validatedAttributes);
+        //
     }
 
     /**
@@ -38,7 +46,18 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return $article;
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Article $article)
+    {
+        //
     }
 
     /**
@@ -50,9 +69,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $validatedAttributes = $this->validateAttributes();
-
-        return $article->update($validatedAttributes);
+        //
     }
 
     /**
@@ -63,14 +80,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        return $article->delete();
-    }
-
-    private function validateAttributes()
-    {
-        return request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
+        //
     }
 }
